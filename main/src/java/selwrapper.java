@@ -31,7 +31,7 @@ import java.util.ArrayList;
 	private static final String log4jPropFile = "main/src/resources/log4j.properties";
 	
     //Instantiate logging component
-  	private wLogger covlog = new wLogger(log4jPropFile);
+  	private wLogger log = new wLogger(log4jPropFile);
     
   	//WebDiriver to be used in the class
 	private WebDriver driver;
@@ -45,7 +45,7 @@ import java.util.ArrayList;
 	 * 
 	 * ______________________________________________________________*/	
 	public DriveWrapper() {	
-		covlog.logIssue(wLogger.INFO, "DriveMonitor", "______________________________________________________________");
+		log.logIssue(wLogger.INFO, "DriveMonitor", "______________________________________________________________");
 
 		//Instantiate logging component
 		try {
@@ -53,7 +53,7 @@ import java.util.ArrayList;
 			PropertyConfigurator.configure(this.log4jPropFile);
 			BasicConfigurator.configure();
 		} catch (Exception e){
-			covlog.logIssue(wLogger.ERROR,"DriveMonitor","Cannot start log4j" + e.getMessage());
+			log.logIssue(wLogger.ERROR,"DriveMonitor","Cannot start log4j" + e.getMessage());
 		}
 		//Start the Selenium driver
 		try {
@@ -65,7 +65,7 @@ import java.util.ArrayList;
 			this.driver.manage().window().maximize();
 
 		} catch (Exception e) {
-			covlog.logIssue(wLogger.ERROR,"DriveMonitor","Cannot create sel driver ::" + e.getMessage());
+			log.logIssue(wLogger.ERROR,"DriveMonitor","Cannot create sel driver ::" + e.getMessage());
 		}
 	}
 
@@ -89,7 +89,7 @@ import java.util.ArrayList;
 	 * 
 	 * ______________________________________________________________*/	
 	public void close() {
-		covlog.logIssue(wLogger.DEBUG,"close" ,"Shutting down WebDriver");
+		log.logIssue(wLogger.DEBUG,"close" ,"Shutting down WebDriver");
 		this.driver.close();
 	}
 	
@@ -100,7 +100,7 @@ import java.util.ArrayList;
 	 * ______________________________________________________________*/	
 	public void gotoURL(String mainDashboard) {
 		//Log a message
-		covlog.logIssue(wLogger.DEBUG,"gotoURL" ,"browsing to " + mainDashboard);
+		log.logIssue(wLogger.DEBUG,"gotoURL" ,"browsing to " + mainDashboard);
 		//Open the report URL
 		this.driver.get(mainDashboard);
 	}
@@ -120,7 +120,7 @@ import java.util.ArrayList;
 	 * 
 	 * ______________________________________________________________*/	
     public void click (String desc, String t) throws Exception {
-    	covlog.logIssue(wLogger.DEBUG, "click", desc);
+    	log.logIssue(wLogger.DEBUG, "click", desc);
     	this.doAction(desc, "click", t, "");
     }
 	
@@ -130,7 +130,7 @@ import java.util.ArrayList;
 	 * 
 	 * ______________________________________________________________*/	
     public void dblclick (String desc, String t) throws Exception {
-    	covlog.logIssue(wLogger.DEBUG, "click", desc);
+    	log.logIssue(wLogger.DEBUG, "click", desc);
     	this.doAction(desc, "dblclick", t, "");
     }
         
@@ -140,7 +140,7 @@ import java.util.ArrayList;
 	 * 
 	 * ______________________________________________________________*/	
     public void type (String desc, String t, String text) throws Exception {
-    	covlog.logIssue(wLogger.DEBUG, "type", desc);
+    	log.logIssue(wLogger.DEBUG, "type", desc);
     	this.doAction(desc, "type", t, text);
     }
     //Returns true in case element is displayed and false in case element is either not found
@@ -150,7 +150,7 @@ import java.util.ArrayList;
     		WebElement we = findElement ( desc,  ElementType);
     		return we.isDisplayed();
     	}catch (Exception e) {
-    		covlog.logIssue(wLogger.WARN, "isElementVisiblie", "Element was not found");
+    		log.logIssue(wLogger.WARN, "isElementVisiblie", "Element was not found");
     		return false;
     	}
     }
@@ -168,7 +168,7 @@ import java.util.ArrayList;
      		intList.add(we.getLocation().y);
      		
      	} catch (Exception e) {
-    		covlog.logIssue(wLogger.ERROR, "getWebElementXY", "Could not find element " + desc + " of type " + ElementType + " was not found");
+    		log.logIssue(wLogger.ERROR, "getWebElementXY", "Could not find element " + desc + " of type " + ElementType + " was not found");
     		throw e;
     	}
      	return intList;
@@ -192,11 +192,14 @@ import java.util.ArrayList;
 		    	case ("xpath"):
 		    		we = this.findElement_byXPath(desc);
 		    		break;
+			case ("css"):
+				we = this.findElement_byCss(desc);
+				break;
 		    	default:
 		    		throw new IllegalArgumentException(desc);
 	    	}
 	    } catch (Exception e) {
-	    		covlog.logIssue(wLogger.ERROR, "findElement", "Could not find element " + desc + " of type " + ElementType + " was not found");
+	    		log.logIssue(wLogger.ERROR, "findElement", "Could not find element " + desc + " of type " + ElementType + " was not found");
 	    		throw e;
 	    	}
 	    return we;
@@ -214,16 +217,16 @@ import java.util.ArrayList;
 	    	
 	    	switch (action) {
 		    	case ("click"):
-		    		covlog.logIssue(wLogger.DEBUG, "doAction", "Clicking on "+we.getTagName() + ", element is enabled: " + we.isEnabled());
+		    		log.logIssue(wLogger.DEBUG, "doAction", "Clicking on "+we.getTagName() + ", element is enabled: " + we.isEnabled());
 		    		we.click();
 		    		break;
 		    	case ("dblclick"):
-		    		covlog.logIssue(wLogger.DEBUG, "doAction", "Double clicking on "+we.getTagName() + ", element is enabled: " + we.isEnabled());
+		    		log.logIssue(wLogger.DEBUG, "doAction", "Double clicking on "+we.getTagName() + ", element is enabled: " + we.isEnabled());
 		    		we.click();
 		    		we.click();
 		    		break;
 		    	case ("type"):
-		    		covlog.logIssue(wLogger.DEBUG, "doAction", "Typing on "+we.getTagName() + ", element is enabled: " + we.isEnabled());
+		    		log.logIssue(wLogger.DEBUG, "doAction", "Typing on "+we.getTagName() + ", element is enabled: " + we.isEnabled());
 		    		we.sendKeys(arg);
 		    		break;
 		    	default:
@@ -231,7 +234,7 @@ import java.util.ArrayList;
 	    	}
 	    	
     	} catch (Exception e) {
-    		covlog.logIssue(wLogger.ERROR, "doAction", "Could not find element " + desc + "!" + e.getMessage());
+    		log.logIssue(wLogger.ERROR, "doAction", "Could not find element " + desc + "!" + e.getMessage());
     		throw e;
     	}
     }
@@ -334,7 +337,7 @@ import java.util.ArrayList;
 	    }catch (StaleElementReferenceException se) {
 	        found = false;
 	    }
-	    covlog.logIssue(wLogger.DEBUG, "objectExists", "Element " + desc + " was " +(found?"":"not") +" found");
+	    log.logIssue(wLogger.DEBUG, "objectExists", "Element " + desc + " was " +(found?"":"not") +" found");
     	return found;
 	}
 	
@@ -351,9 +354,9 @@ import java.util.ArrayList;
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			js.executeScript("window.scrollTo(0,Math.max(document.documentElement.scrollHeight," + 
 							 "document.body.scrollHeight,document.documentElement.clientHeight));");
-			covlog.logIssue(wLogger.DEBUG, "scrollDown","Scrolling for the " + ++i + " times");
+			log.logIssue(wLogger.DEBUG, "scrollDown","Scrolling for the " + ++i + " times");
 			String tmp = js.executeScript("return document.readyState").toString();
-			covlog.logIssue(wLogger.DEBUG, "scrollDown","js exection == " + tmp);
+			log.logIssue(wLogger.DEBUG, "scrollDown","js exection == " + tmp);
 		    readyStateComplete = tmp.contentEquals("complete");
 		    //In case the object doesn't exists, break out of the loop
 		    //the object might represent a spinner that shows that more
@@ -366,7 +369,7 @@ import java.util.ArrayList;
 		    //Just in case to prevent an infinite loop.
 		    if (i>2100) {
 		    	readyStateComplete=true;
-		    	covlog.logIssue(wLogger.WARN, "scrollDown", "Scrolling exited early. Completed " + i + " interation.");
+		    	log.logIssue(wLogger.WARN, "scrollDown", "Scrolling exited early. Completed " + i + " interation.");
 		    }
 		}
 	}
