@@ -3,7 +3,8 @@
   <groupId>selwrapper</groupId>
   <artifactId>selwrapper</artifactId>
   <version>1.0.1-SNAPSHOT</version>
-  <name>Wrapper for Selenium driver</name>
+  <name>selwrapper</name>
+  <packaging>jar</packaging>
   <description>A class that wraps around Selenium to allow to simplfy the code.</description>
   
   <dependencies>
@@ -38,18 +39,20 @@
 	</exclusions>
     </dependency>
   </dependencies>
- <plugins>
-  <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-compiler-plugin</artifactId>
-    <configuration>
-        <source>7</source> <!-- see here, says only 7, not 1.7 -->
-        <target>7</target> <!-- here as well -->
+  <build>
+   <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <configuration>
+        <source>7</source> 
+        <target>7</target> 
         <showDeprecation>true</showDeprecation>
         <showWarnings>true</showWarnings>
         <executable>${env.JAVA_HOME_7}/bin/javac</executable>
         <fork>true</fork>
-    </configuration>
-   </plugin> 
-  </plugins>
+       </configuration>
+      </plugin> 
+    </plugins>
+  </build>
 </project>

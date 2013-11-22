@@ -15,6 +15,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 //import org.openqa.selenium.chrome.ChromeDriver;
 //import org.openqa.selenium.phantomjs.*;
 
+//Used for mounse and keyboard actions
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Action;
+
 import java.util.ArrayList;
 
 /* 
@@ -396,7 +400,7 @@ import java.util.ArrayList;
 	}
 	private void findClass (String s) {
 		for (int i=0;;i++) {
-			System.out.print ("FIND " + s + " => " + java.lang.Thread.currentThread().getStackTrace()[i].getMethodName() + "\n");
+			System.err.println ("FIND " + s + " => " + java.lang.Thread.currentThread().getStackTrace()[i].getMethodName() + "\n");
 			if (java.lang.Thread.currentThread().getStackTrace()[i].getMethodName().compareTo("<init>")==0) {
 				System.out.print ("System function is :: " + java.lang.Thread.currentThread().getStackTrace()[i-1].getMethodName() + "\n");
 				break;
