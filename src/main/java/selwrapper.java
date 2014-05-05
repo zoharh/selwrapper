@@ -195,6 +195,9 @@ import java.util.ArrayList;
 		    	case ("xpath"):
 		    		we = this.findElement_byXPath(desc);
 		    		break;
+			case ("tagname"):
+				we = this.findElement_byTagName(desc);
+				break;
 			case ("css"):
 				we = this.findElement_byCss(desc);
 				break;
@@ -271,6 +274,15 @@ import java.util.ArrayList;
             return this.driver.findElement(By.name(eName));
     }
     
+    /*______________________________________________________________
+	 * 
+	 * Find and return a WebElemnt by its tagName properties
+	 * 
+	 * ______________________________________________________________*/	
+    private WebElement findElement_byTagName (String css){
+        return this.driver.findElement(By.tagName(css));
+    }
+
     /*______________________________________________________________
 	 * 
 	 * Find and return a WebElemnt by its CSS properties
