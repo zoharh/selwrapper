@@ -39,7 +39,6 @@ import java.util.ArrayList;
   	//WebDiriver to be used in the class
 	private WebDriver driver;
 	private static String siteURL = "";
-
 	
 	/*______________________________________________________________
 	 * 
@@ -223,16 +222,16 @@ import java.util.ArrayList;
 	    	
 	    	switch (action) {
 		    	case ("click"):
-		    		log.logIssue(wLogger.DEBUG, "doAction", "Clicking on "+we.getTagName() + ", element is enabled: " + we.isEnabled());
+		    		log.logIssue(wLogger.DEBUG, "doAction", "Clicking on " + we.getTagName() + ", element is enabled: " + we.isEnabled());
 		    		we.click();
 		    		break;
 		    	case ("dblclick"):
-		    		log.logIssue(wLogger.DEBUG, "doAction", "Double clicking on "+we.getTagName() + ", element is enabled: " + we.isEnabled());
+		    		log.logIssue(wLogger.DEBUG, "doAction", "Double clicking on " + we.getTagName() + ", element is enabled: " + we.isEnabled());
 		    		Actions builder = new Actions(this.driver);
 		    		builder.doubleClick(we).perform();
 		    		break;
 			case ("type"):
-		    		log.logIssue(wLogger.DEBUG, "doAction", "Typing on "+we.getTagName() + ", element is enabled: " + we.isEnabled());
+		    		log.logIssue(wLogger.DEBUG, "doAction", "Typing on " + we.getTagName() + ", element is enabled: " + we.isEnabled());
 		    		we.sendKeys(arg);
 		    		break;
 		    	default:
