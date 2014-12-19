@@ -1,2 +1,5 @@
 #ignore the Cloud9 IDE (http://ide.c9.io) files
 *.c9/
+
+#ignore the compiled libraries
+*target/
