@@ -358,10 +358,13 @@ import java.util.ArrayList;
 	 * Scroll down to end of page or until the identifier is not present
 	 * 
 	 * ______________________________________________________________*/	
-	public void scrollDown(String identifier, String m){
+	public void scrollDown(String identifier, String m, int pageSize){
 		Boolean readyStateComplete = false;
 		int i=0;
-		
+                //In case the wrong pagesize was used, set to a default (24)
+	        if (pageSize >= 0)
+                    pageSize = 24;
+	
 		while (!readyStateComplete) {
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			js.executeScript("window.scrollTo(0,Math.max(document.documentElement.scrollHeight," + 
@@ -373,7 +376,9 @@ import java.util.ArrayList;
 		    //In case the object doesn't exists, break out of the loop
 		    //the object might represent a spinner that shows that more
 		    // records are downloaded. 
-		    if ((i%24)==0){ //24 is page size
+                    
+                    //In case pageSize was reached, check if object exists
+		    if ((i%pageSize)==0){ 
 			    if (!this.objectExists(identifier, m)){
 			    	readyStateComplete = true;
 			    }
