@@ -157,9 +157,6 @@ import java.util.ArrayList;
     	}
     }
     
-    //Return the X & Y values for a WebElement
-    // intList.get(0) = X value
-    //intList.get(1) = Y value
     public ArrayList<Integer> getWebElementXY (String desc, String ElementType) throws Exception {
     	 WebElement we;
     	 ArrayList<Integer> intList = new ArrayList<Integer>();
@@ -410,10 +407,11 @@ import java.util.ArrayList;
 			//log4j property file
 			PropertyConfigurator.configure(log4jPropFile);
 			BasicConfigurator.configure();
-		} catch (Exception e){
+		} catch (Exception e) {
 			System.out.print("Cannot start log4j" + e.getMessage());
 		}
 	}
+	
 	private void findClass (String s) {
 		for (int i=0;;i++) {
 			System.err.println ("FIND " + s + " => " + java.lang.Thread.currentThread().getStackTrace()[i].getMethodName() + "\n");
@@ -422,8 +420,8 @@ import java.util.ArrayList;
 				break;
 			}
 		}
-
 	}
+	
 	/*______________________________________________________________
 	 * 
 	 * In order to ensure standard logging I created a wrapper 
@@ -453,7 +451,7 @@ import java.util.ArrayList;
 			case "fatal":
 				log.fatal(finalMsg);
 				return;
-				default:
+			default:
 					throw new IllegalArgumentException(type);
 		}
 	}
