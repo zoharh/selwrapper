@@ -47,7 +47,7 @@ import java.util.ArrayList;
 	 * 
 	 * ______________________________________________________________*/	
 	public DriveWrapper() {	
-		log.logIssue(wLogger.INFO, "DriveMonitor", "______________________________________________________________");
+		log.logIssue(wLogger.INFO, "DriveMonitor", "_____Initializing Logger_______");
 
 		//Instantiate logging component
 		try {
@@ -217,22 +217,22 @@ import java.util.ArrayList;
     	try {
     		we=findElement( desc, ElementType);
 	    	
-	    	switch (action) {
-		    	case ("click"):
+	        switch (action) {
+		        case ("click"):
 		    		log.logIssue(wLogger.DEBUG, "doAction", "Clicking on " + we.getTagName() + ", element is enabled: " + we.isEnabled());
 		    		we.click();
 		    		break;
-		    	case ("dblclick"):
+		        case ("dblclick"):
 		    		log.logIssue(wLogger.DEBUG, "doAction", "Double clicking on " + we.getTagName() + ", element is enabled: " + we.isEnabled());
 		    		Actions builder = new Actions(this.driver);
 		    		builder.doubleClick(we).perform();
 		    		break;
-			case ("type"):
+		        case ("type"):
 		    		log.logIssue(wLogger.DEBUG, "doAction", "Typing on " + we.getTagName() + ", element is enabled: " + we.isEnabled());
 		    		we.sendKeys(arg);
 		    		break;
-		    	default:
-		    		throw new IllegalArgumentException(arg);
+		        default:
+		    	    throw new IllegalArgumentException(arg);
 	    	}
 	    	
     	} catch (Exception e) {
@@ -433,7 +433,7 @@ import java.util.ArrayList;
 	public void logIssue (String type, String func, String msg) throws IllegalArgumentException {
 		
 		String sep = " :: ";
-		String finalMsg = func + sep + msg;
+    	String finalMsg = func + sep + msg;
 		findClass(func);
 		switch (type) {
 			case "debug":
