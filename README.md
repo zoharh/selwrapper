@@ -100,14 +100,25 @@ driver.log.logIssue(wLogger.ERROR, "MyFunction", "An error occurred");
 ```
 selwrapper/
 ├── src/
-│   └── main/
+│   ├── main/
+│   │   ├── java/
+│   │   │   ├── selwrapper.java      # Main DriveWrapper class
+│   │   │   └── wLogger.java         # Logging wrapper class
+│   │   └── resources/
+│   │       └── log4j2.xml           # Log4j2 configuration
+│   └── test/
 │       ├── java/
-│       │   ├── selwrapper.java      # Main DriveWrapper class
-│       │   └── wLogger.java         # Logging wrapper class
+│       │   ├── wLoggerTest.java     # Unit tests for wLogger class
+│       │   ├── DriveWrapperTest.java # Unit tests for DriveWrapper class
+│       │   └── SelWrapperTestSuite.java # Test suite runner
 │       └── resources/
-│           └── log4j.properties     # Log4j configuration
+│           └── log4j2-test.xml      # Test-specific Log4j2 configuration
 ├── pom.xml                          # Maven configuration
-└── README.md                        # This file
+├── README.md                        # This file
+└── target/                          # Build output (generated)
+    ├── classes/                     # Compiled Java classes
+    ├── test-classes/                # Compiled test classes
+    └── selwrapper-1.0.3-SNAPSHOT.jar # Generated JAR file
 ```
 
 ## Configuration
