@@ -51,7 +51,7 @@ SelWrapper is a utility library that provides a simplified interface for Seleniu
 ## Dependencies
 
 The project uses the following main dependencies:
-- **Selenium WebDriver 2.53.0**: For web automation
+- **Selenium WebDriver 4.18.1**: For web automation (latest stable version)
 - **Log4j 2.23.1**: For logging functionality (latest stable version)
 - **JUnit 4.12**: For testing (test scope)
 
@@ -168,4 +168,4 @@ For issues and questions, please check the project repository or create an issue
 
 ---
 
-**Note**: This project is designed to work with Selenium WebDriver 2.53.0 and Log4j 2.23.1. For newer versions of Selenium, some modifications may be required due to API changes.
+**Note**: This project is designed to work with Selenium WebDriver 4.18.1 and Log4j 2.23.1. The code has been updated to use modern Selenium 4.x APIs.

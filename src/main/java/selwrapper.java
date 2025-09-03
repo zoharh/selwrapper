@@ -1,4 +1,5 @@
 import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 //Import log4j2 classes.
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +15,9 @@ import org.openqa.selenium.WebElement;
 
 //Select the proper web driver needed for the project
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 //import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.chrome.ChromeOptions;
 //import org.openqa.selenium.phantomjs.*;
 
 //Used for mounse and keyboard actions
@@ -60,12 +63,15 @@ import java.util.ArrayList;
                 }
                 //Start the Selenium driver
                 try {
-                        //Create a new FF driver
-                        this.driver = new FirefoxDriver();
-                        //set default timeout for driver
-                        this.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-                        //Maximize the browser's window
-                        this.driver.manage().window().maximize();
+                        //Create Firefox options for Selenium 4.x
+                        FirefoxOptions options = new FirefoxOptions();
+                        options.addArguments("--start-maximized");
+                        
+                        //Create a new FF driver with options
+                        this.driver = new FirefoxDriver(options);
+                        
+                        //set default timeout for driver (Selenium 4.x syntax)
+                        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
                 } catch (Exception e) {
                         log.logIssue(wLogger.ERROR,"DriveMonitor","Cannot create sel driver ::" + e.getMessage());
