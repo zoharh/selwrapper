@@ -25,12 +25,20 @@ public class wLogger {
     }
     
     private void findClass (String s) {
-        for (int i=0;;i++) {
-            System.err.println ("FIND " + s + " => " + java.lang.Thread.currentThread().getStackTrace()[i].getMethodName() + "\n");
-            if (java.lang.Thread.currentThread().getStackTrace()[i].getMethodName().compareTo("<init>")==0) {
-                System.out.print ("System function is :: " + java.lang.Thread.currentThread().getStackTrace()[i-1].getMethodName() + "\n");
-                break;
+        try {
+            StackTraceElement[] stackTrace = java.lang.Thread.currentThread().getStackTrace();
+            for (int i = 0; i < stackTrace.length && i < 10; i++) { // Limit to first 10 elements to prevent infinite loop
+                System.err.println ("FIND " + s + " => " + stackTrace[i].getMethodName() + "\n");
+                if (stackTrace[i].getMethodName().compareTo("<init>")==0) {
+                    if (i > 0) {
+                        System.out.print ("System function is :: " + stackTrace[i-1].getMethodName() + "\n");
+                    }
+                    break;
+                }
             }
+        } catch (Exception e) {
+            // Silently ignore any stack trace errors
+            System.err.println("Error in findClass: " + e.getMessage());
         }
     }
     

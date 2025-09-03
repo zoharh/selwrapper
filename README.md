@@ -141,6 +141,44 @@ mvn test
 mvn package
 ```
 
+### Full Build (Compile, Test, Package, Install)
+```bash
+mvn clean install
+```
+
+## Unit Tests
+
+The project includes comprehensive unit tests to ensure code quality and reliability:
+
+### Test Structure
+- **wLoggerTest.java**: Tests the logging wrapper functionality
+- **DriveWrapperTest.java**: Tests basic DriveWrapper functionality
+- **SelWrapperTestSuite.java**: Test suite that runs all tests together
+
+### Test Coverage
+The unit tests cover:
+- ✅ **wLogger Class**: All logging levels, constructor, error handling
+- ✅ **DriveWrapper Class**: Basic functionality and constants
+- ✅ **Edge Cases**: Null values, empty strings, invalid inputs
+- ✅ **Error Handling**: Exception scenarios and validation
+
+### Running Tests
+```bash
+# Run all tests
+mvn test
+
+# Run specific test class
+mvn test -Dtest=wLoggerTest
+
+# Run with verbose output
+mvn test -Dtest=DriveWrapperTest -Dsurefire.useFile=false
+```
+
+### Test Dependencies
+- **JUnit 4.13.2**: Core testing framework
+- **Mockito 5.10.0**: Mocking framework for complex dependencies
+- **Mockito Inline 5.2.0**: Support for mocking static methods and constructors
+
 ## Contributing
 
 1. Fork the repository
