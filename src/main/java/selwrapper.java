@@ -128,33 +128,34 @@ import java.util.ArrayList;
          * Clicks on the WebElement found by the description
          * 
          * ______________________________________________________________*/        
-    public void click (String desc, String t) throws Exception {
+        public void click (String desc, String t) throws Exception {
             log.logIssue(wLogger.DEBUG, "click", desc);
             this.doAction(desc, "click", t, "");
-    }
+        }
         
-    /*______________________________________________________________
-         * 
-         * Double Clicks on the WebElement found by the description
-         * 
-         * ______________________________________________________________*/        
-    public void dblclick (String desc, String t) throws Exception {
+        /*______________________________________________________________
+                * 
+                * Double Clicks on the WebElement found by the description
+                * 
+                * ______________________________________________________________*/        
+        public void dblclick (String desc, String t) throws Exception {
             log.logIssue(wLogger.DEBUG, "click", desc);
             this.doAction(desc, "dblclick", t, "");
-    }
+        }
         
-    /*______________________________________________________________
-         * 
-         * Type on the WebElement found by the description
-         * 
-         * ______________________________________________________________*/        
-    public void type (String desc, String t, String text) throws Exception {
+        /*______________________________________________________________
+                * 
+                * Type on the WebElement found by the description
+                * 
+                * ______________________________________________________________*/        
+        public void type (String desc, String t, String text) throws Exception {
             log.logIssue(wLogger.DEBUG, "type", desc);
             this.doAction(desc, "type", t, text);
-    }
-    //Returns true in case element is displayed and false in case element is either not found
-    // or not displayed
-    public boolean isElementVisiblie (String desc, String ElementType) {
+        }
+
+        //Returns true in case element is displayed and false in case element is either not found
+        // or not displayed
+        public boolean isElementVisiblie (String desc, String ElementType) {
             try {
                     WebElement we = findElement ( desc,  ElementType);
                     return we.isDisplayed();
@@ -162,9 +163,9 @@ import java.util.ArrayList;
                     log.logIssue(wLogger.WARN, "isElementVisiblie", "Element was not found");
                     return false;
             }
-    }
+        }
     
-    public ArrayList<Integer> getWebElementXY (String desc, String ElementType) throws Exception {
+        public ArrayList<Integer> getWebElementXY (String desc, String ElementType) throws Exception {
              WebElement we;
              ArrayList<Integer> intList = new ArrayList<Integer>();
 
@@ -178,10 +179,10 @@ import java.util.ArrayList;
                     throw e;
             }
              return intList;
-    }
+        }
     
-    //Return WebElement using the description and Description Type
-    private WebElement findElement (String desc, String ElementType) throws Exception {
+        //Return WebElement using the description and Description Type
+        private WebElement findElement (String desc, String ElementType) throws Exception {
             WebElement we;
             
             try {
@@ -212,14 +213,14 @@ import java.util.ArrayList;
                   throw e;
                   }
             return we;
-    }
+        }
     
-    /*______________________________________________________________
-         * 
-         * Find the web element and perform the requested action against it
-         * 
-         * ______________________________________________________________*/        
-    private void doAction (String desc, String action, String ElementType, String arg) throws Exception {
+        /*______________________________________________________________
+                * 
+                * Find the web element and perform the requested action against it
+                * 
+                * ______________________________________________________________*/        
+        private void doAction (String desc, String action, String ElementType, String arg) throws Exception {
             WebElement we;
             try {
                     we=findElement( desc, ElementType);
@@ -246,66 +247,66 @@ import java.util.ArrayList;
                     log.logIssue(wLogger.ERROR, "doAction", "Could not find element " + desc + "!" + e.getMessage());
                     throw e;
             }
-    }
+        }
     
-    /*______________________________________________________________
-         * 
-         * Find and return a WebElemnt by its ID
-         * 
-         * ______________________________________________________________*/                                                                                                                                                                    
-    private WebElement findElement_byID (String id) {                                                                                                                                                         
+        /*______________________________________________________________
+                * 
+                * Find and return a WebElemnt by its ID
+                * 
+                * ______________________________________________________________*/                                                                                                                                                                    
+        private WebElement findElement_byID (String id) {                                                                                                                                                         
             return this.driver.findElement(By.id(id));                                                                                                                                                   
-    }
+        }
 
-    /*______________________________________________________________
-         * 
-         * Find and return a WebElemnt by its link text 
-         * (or partial link text)
-         * 
-         * ______________________________________________________________*/                                                                                                                                                                   
-    private WebElement findElement_byLinkText (String linkText) {                                                                                                                                                         
+        /*______________________________________________________________
+                * 
+                * Find and return a WebElemnt by its link text 
+                * (or partial link text)
+                * 
+                * ______________________________________________________________*/                                                                                                                                                                   
+        private WebElement findElement_byLinkText (String linkText) {                                                                                                                                                         
             return this.driver.findElement(By.partialLinkText(linkText));                                                                                                                                                   
-    }
+        }
 
-    /*______________________________________________________________
-         * 
-         * Find and return a WebElemnt by its Name
-         * 
-         * ______________________________________________________________*/        
-    //Return a WebElement by finding its ID                                                                                                                                                              
-    private WebElement findElement_byName (String eName) {                                                                                                                                                         
+        /*______________________________________________________________
+                * 
+                * Find and return a WebElemnt by its Name
+                * 
+                * ______________________________________________________________*/        
+        //Return a WebElement by finding its ID                                                                                                                                                              
+        private WebElement findElement_byName (String eName) {                                                                                                                                                         
             return this.driver.findElement(By.name(eName));
-    }
+        }
     
-    /*______________________________________________________________
-         * 
-         * Find and return a WebElemnt by its tagName properties
-         * 
-         * ______________________________________________________________*/        
-    private WebElement findElement_byTagName (String css){
-        return this.driver.findElement(By.tagName(css));
-    }
+        /*______________________________________________________________
+                * 
+                * Find and return a WebElemnt by its tagName properties
+                * 
+                * ______________________________________________________________*/        
+        private WebElement findElement_byTagName (String css){
+                return this.driver.findElement(By.tagName(css));
+         }
 
-    /*______________________________________________________________
-         * 
-         * Find and return a WebElemnt by its CSS properties
-         * 
-         * ______________________________________________________________*/        
-    private WebElement findElement_byCss (String css){
-        return this.driver.findElement(By.cssSelector(css));
-    }
+        /*______________________________________________________________
+                * 
+                * Find and return a WebElemnt by its CSS properties
+                * 
+                * ______________________________________________________________*/        
+        private WebElement findElement_byCss (String css){
+                return this.driver.findElement(By.cssSelector(css));
+        }
 
-    /*______________________________________________________________
-         * 
-         * Find and return a WebElemnt by its XPath properties
-         * 
-         * ______________________________________________________________*/        
-   //Return a WebElement by finding XPath                                                                                                                                                              
-    private WebElement findElement_byXPath (String xpath) {                                                                                                                                                          
-            return this.driver.findElement(By.xpath(xpath) );
-    }
-    
-    /*______________________________________________________________
+        /*______________________________________________________________
+                * 
+                * Find and return a WebElemnt by its XPath properties
+                * 
+                * ______________________________________________________________*/        
+        //Return a WebElement by finding XPath                                                                                                                                                              
+        private WebElement findElement_byXPath (String xpath) {                                                                                                                                                          
+                return this.driver.findElement(By.xpath(xpath) );
+        }
+        
+        /*______________________________________________________________
          * 
          * return the default URL to run against
          * 
