@@ -395,6 +395,14 @@ import java.util.ArrayList;
                             readyStateComplete=true;
                             log.logIssue(wLogger.WARN, "scrollDown", "Scrolling exited early. Completed " + i + " interation.");
                     }
+
+                    if (!readyStateComplete) {
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                        }
+                    }
                 }
         }
 }
