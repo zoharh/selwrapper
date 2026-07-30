@@ -1,4 +1,3 @@
-import java.util.concurrent.TimeUnit;
 import java.time.Duration;
 
 //Import log4j2 classes.
