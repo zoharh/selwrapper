@@ -3,6 +3,10 @@ import org.junit.Test;
 import org.junit.After;
 import static org.junit.Assert.*;
 
+import org.mockito.MockedConstruction;
+import org.mockito.Mockito;
+import org.openqa.selenium.firefox.FirefoxOptions;
+
 /**
  * Unit tests for DriveWrapper class
  * Tests basic functionality without complex WebDriver mocking
@@ -111,6 +115,25 @@ public class DriveWrapperTest {
         }
     }
     
+    @Test
+    public void testWebDriverErrorHandling() {
+        // Test that an exception during WebDriver initialization is caught and logged
+        try (MockedConstruction<FirefoxOptions> mockedOptions = Mockito.mockConstruction(FirefoxOptions.class, (mock, context) -> {
+            Mockito.doThrow(new RuntimeException("Simulated driver initialization error")).when(mock).addArguments(Mockito.anyString());
+        });
+        MockedConstruction<wLogger> mockedLogger = Mockito.mockConstruction(wLogger.class)) {
+
+            // This will trigger the instantiation and the simulated error
+            new DriveWrapper();
+
+            // Get the constructed wLogger instance
+            wLogger logger = mockedLogger.constructed().get(0);
+
+            // Verify that the error was logged appropriately
+            Mockito.verify(logger).logIssue(wLogger.ERROR, "DriveMonitor", "Cannot create sel driver ::Simulated driver initialization error");
+        }
+    }
+
     @Test
     public void testMultipleWLoggerInstances() {
         // Test creating multiple wLogger instances
