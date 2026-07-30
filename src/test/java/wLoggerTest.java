@@ -51,6 +51,23 @@ public class wLoggerTest {
     }
     
     @Test
+    public void testConstructorException() {
+        // Test that constructor handles exceptions properly by mocking the static method
+        try (MockedStatic<Configurator> mockedConfigurator = Mockito.mockStatic(Configurator.class)) {
+            mockedConfigurator.when(() -> Configurator.initialize(Mockito.any(), Mockito.anyString()))
+                              .thenThrow(new RuntimeException("Simulated configuration error"));
+
+            // Create a new logger to trigger the constructor with the mocked exception
+            wLogger testLogger = new wLogger("test-invalid.xml");
+
+            // Check that the exception message is printed to System.out
+            String output = outContent.toString();
+            assertTrue("Should print exception message to stdout",
+                output.contains("Cannot start log4j2: Simulated configuration error"));
+        }
+    }
+
+    @Test
     public void testLogLevelsConstants() {
         // Test that all log level constants are defined correctly
         assertEquals("INFO level should be 'info'", "info", wLogger.INFO);
