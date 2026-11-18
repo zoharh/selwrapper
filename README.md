@@ -102,8 +102,9 @@ selwrapper/
 ├── src/
 │   ├── main/
 │   │   ├── java/
-│   │   │   ├── DriveWrapper.java    # WebDriver wrapper class
-│   │   │   └── wLogger.java         # Logging wrapper class
+│   │   │   └── selwrapper/
+│   │   │       ├── DriveWrapper.java    # WebDriver wrapper class
+│   │   │       └── wLogger.java         # Logging wrapper class
 │   │   └── resources/
 │   │       └── log4j2.xml           # Log4j2 configuration
 │   └── test/

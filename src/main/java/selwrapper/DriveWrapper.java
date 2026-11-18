@@ -1,3 +1,5 @@
+package selwrapper;
+
 import java.util.concurrent.TimeUnit;
 import java.time.Duration;
 
@@ -30,7 +32,7 @@ import java.util.ArrayList;
  * 
  * */
 
- class DriveWrapper {
+public class DriveWrapper {
     
     //log4j2 configuration file
         private static final String log4jPropFile = "main/src/resources/log4j2.xml";
