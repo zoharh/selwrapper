@@ -1,7 +1,7 @@
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.After;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.apache.logging.log4j.core.config.Configurator;
@@ -23,7 +23,7 @@ public class wLoggerTest {
     private PrintStream originalOut;
     private PrintStream originalErr;
     
-    @Before
+    @BeforeEach
     public void setUp() {
         // Capture System.out and System.err for testing
         outContent = new ByteArrayOutputStream();
@@ -37,7 +37,7 @@ public class wLoggerTest {
         logger = new wLogger("test-log4j2.xml");
     }
     
-    @After
+    @AfterEach
     public void tearDown() {
         // Restore original System.out and System.err
         System.setOut(originalOut);
@@ -47,17 +47,17 @@ public class wLoggerTest {
     @Test
     public void testConstructor() {
         // Test that constructor doesn't throw exception
-        assertNotNull("Logger should be created successfully", logger);
+        assertNotNull(logger, "Logger should be created successfully");
     }
     
     @Test
     public void testLogLevelsConstants() {
         // Test that all log level constants are defined correctly
-        assertEquals("INFO level should be 'info'", "info", wLogger.INFO);
-        assertEquals("DEBUG level should be 'debug'", "debug", wLogger.DEBUG);
-        assertEquals("ERROR level should be 'error'", "error", wLogger.ERROR);
-        assertEquals("WARN level should be 'warn'", "warn", wLogger.WARN);
-        assertEquals("FATAL level should be 'fatal'", "fatal", wLogger.FATAL);
+        assertEquals("info", wLogger.INFO, "INFO level should be 'info'");
+        assertEquals("debug", wLogger.DEBUG, "DEBUG level should be 'debug'");
+        assertEquals("error", wLogger.ERROR, "ERROR level should be 'error'");
+        assertEquals("warn", wLogger.WARN, "WARN level should be 'warn'");
+        assertEquals("fatal", wLogger.FATAL, "FATAL level should be 'fatal'");
     }
     
     @Test
@@ -66,7 +66,7 @@ public class wLoggerTest {
         try {
             logger.logIssue(wLogger.INFO, "testFunction", "test message");
             // Should not throw exception
-            assertTrue("INFO logging should complete without exception", true);
+            assertTrue(true, "INFO logging should complete without exception");
         } catch (Exception e) {
             fail("INFO logging should not throw exception: " + e.getMessage());
         }
@@ -78,7 +78,7 @@ public class wLoggerTest {
         try {
             logger.logIssue(wLogger.DEBUG, "testFunction", "test message");
             // Should not throw exception
-            assertTrue("DEBUG logging should complete without exception", true);
+            assertTrue(true, "DEBUG logging should complete without exception");
         } catch (Exception e) {
             fail("DEBUG logging should not throw exception: " + e.getMessage());
         }
@@ -90,7 +90,7 @@ public class wLoggerTest {
         try {
             logger.logIssue(wLogger.WARN, "testFunction", "test message");
             // Should not throw exception
-            assertTrue("WARN logging should complete without exception", true);
+            assertTrue(true, "WARN logging should complete without exception");
         } catch (Exception e) {
             fail("WARN logging should not throw exception: " + e.getMessage());
         }
@@ -102,7 +102,7 @@ public class wLoggerTest {
         try {
             logger.logIssue(wLogger.ERROR, "testFunction", "test message");
             // Should not throw exception
-            assertTrue("ERROR logging should complete without exception", true);
+            assertTrue(true, "ERROR logging should complete without exception");
         } catch (Exception e) {
             fail("ERROR logging should not throw exception: " + e.getMessage());
         }
@@ -114,16 +114,17 @@ public class wLoggerTest {
         try {
             logger.logIssue(wLogger.FATAL, "testFunction", "test message");
             // Should not throw exception
-            assertTrue("FATAL logging should complete without exception", true);
+            assertTrue(true, "FATAL logging should complete without exception");
         } catch (Exception e) {
             fail("FATAL logging should not throw exception: " + e.getMessage());
         }
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testLogIssueInvalidLevel() {
         // Test that invalid log level throws IllegalArgumentException
-        logger.logIssue("invalid", "testFunction", "test message");
+        assertThrows(IllegalArgumentException.class,
+                () -> logger.logIssue("invalid", "testFunction", "test message"));
     }
     
     @Test
@@ -132,7 +133,7 @@ public class wLoggerTest {
         try {
             logger.logIssue(wLogger.INFO, null, "test message");
             // Should not throw exception
-            assertTrue("Logging with null function should complete without exception", true);
+            assertTrue(true, "Logging with null function should complete without exception");
         } catch (Exception e) {
             fail("Logging with null function should not throw exception: " + e.getMessage());
         }
@@ -144,7 +145,7 @@ public class wLoggerTest {
         try {
             logger.logIssue(wLogger.INFO, "testFunction", null);
             // Should not throw exception
-            assertTrue("Logging with null message should complete without exception", true);
+            assertTrue(true, "Logging with null message should complete without exception");
         } catch (Exception e) {
             fail("Logging with null message should not throw exception: " + e.getMessage());
         }
@@ -156,7 +157,7 @@ public class wLoggerTest {
         try {
             logger.logIssue(wLogger.INFO, "", "");
             // Should not throw exception
-            assertTrue("Logging with empty strings should complete without exception", true);
+            assertTrue(true, "Logging with empty strings should complete without exception");
         } catch (Exception e) {
             fail("Logging with empty strings should not throw exception: " + e.getMessage());
         }
@@ -169,7 +170,7 @@ public class wLoggerTest {
         try {
             logger.logIssue(wLogger.DEBUG, "testFunction", "test message");
             // Should not throw exception
-            assertTrue("findClass execution should not throw exception", true);
+            assertTrue(true, "findClass execution should not throw exception");
         } catch (Exception e) {
             fail("findClass execution should not throw exception: " + e.getMessage());
         }
@@ -186,7 +187,7 @@ public class wLoggerTest {
             logger.logIssue(wLogger.FATAL, "function5", "message5");
             
             // All should complete without exception
-            assertTrue("Multiple log calls should complete without exception", true);
+            assertTrue(true, "Multiple log calls should complete without exception");
         } catch (Exception e) {
             fail("Multiple log calls should not throw exception: " + e.getMessage());
         }

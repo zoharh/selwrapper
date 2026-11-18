@@ -1,13 +1,12 @@
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.junit.platform.suite.api.SelectClasses;
+import org.junit.platform.suite.api.Suite;
 
 /**
  * Test suite for SelWrapper project
  * Runs all unit tests for both wLogger and DriveWrapper classes
  */
-@RunWith(Suite.class)
-@SuiteClasses({
+@Suite
+@SelectClasses({
     wLoggerTest.class,
     DriveWrapperTest.class
 })

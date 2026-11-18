@@ -8,7 +8,7 @@ SelWrapper is a utility library that provides a simplified interface for Seleniu
 
 - **DriveWrapper**: A comprehensive wrapper around Selenium WebDriver with built-in logging
 - **wLogger**: A standardized logging wrapper around Log4j for consistent logging across the project
-- Pre-configured WebDriver setup with Firefox driver
+- Pre-configured WebDriver setup with ChromeDriver
 - Built-in error handling and timeout management
 - Simplified methods for common web automation tasks
 
@@ -22,9 +22,9 @@ SelWrapper is a utility library that provides a simplified interface for Seleniu
 
 ## Prerequisites
 
-- Java 7 or higher
+- Java 25 or higher
 - Maven 3.0 or higher
-- Firefox browser (for default WebDriver)
+- Google Chrome (ChromeDriver is resolved automatically for the installed browser)
 
 ## Installation
 
@@ -51,9 +51,9 @@ SelWrapper is a utility library that provides a simplified interface for Seleniu
 ## Dependencies
 
 The project uses the following main dependencies:
-- **Selenium WebDriver 4.18.1**: For web automation (latest stable version)
-- **Log4j 2.23.1**: For logging functionality (latest stable version)
-- **JUnit 4.12**: For testing (test scope)
+- **Selenium WebDriver 4.52.0**: For web automation, including ChromeDriver support (latest stable version)
+- **Log4j 2.26.1**: For logging functionality (latest stable version)
+- **JUnit 6.1.3**: For testing (test scope)
 
 ## Usage
 
@@ -102,7 +102,7 @@ selwrapper/
 ├── src/
 │   ├── main/
 │   │   ├── java/
-│   │   │   ├── selwrapper.java      # Main DriveWrapper class
+│   │   │   ├── DriveWrapper.java    # WebDriver wrapper class
 │   │   │   └── wLogger.java         # Logging wrapper class
 │   │   └── resources/
 │   │       └── log4j2.xml           # Log4j2 configuration
@@ -130,7 +130,7 @@ The project includes a `log4j2.xml` file in `src/main/resources/` for logging co
 ### WebDriver Configuration
 
 Default WebDriver settings:
-- **Browser**: Firefox
+- **Browser**: Chrome (ChromeDriver matched to the installed Chrome version)
 - **Implicit Wait**: 30 seconds
 - **Window**: Maximized
 - **Timeout**: 30 seconds
@@ -186,9 +186,8 @@ mvn test -Dtest=DriveWrapperTest -Dsurefire.useFile=false
 ```
 
 ### Test Dependencies
-- **JUnit 4.13.2**: Core testing framework
-- **Mockito 5.10.0**: Mocking framework for complex dependencies
-- **Mockito Inline 5.2.0**: Support for mocking static methods and constructors
+- **JUnit 6.1.3**: Core testing framework
+- **Mockito 5.24.0**: Mocking framework, including constructor mocking
 
 ## Contributing
 
@@ -217,4 +216,4 @@ For issues and questions, please check the project repository or create an issue
 
 ---
 
-**Note**: This project is designed to work with Selenium WebDriver 4.18.1 and Log4j 2.23.1. The code has been updated to use modern Selenium 4.x APIs.
+**Note**: This project is designed to work with Java 25, Selenium WebDriver 4.52.0, and Log4j 2.26.1. The code has been updated to use modern Selenium 4.x APIs.

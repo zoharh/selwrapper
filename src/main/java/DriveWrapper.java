@@ -14,11 +14,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 //Select the proper web driver needed for the project
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-//import org.openqa.selenium.chrome.ChromeDriver;
-//import org.openqa.selenium.chrome.ChromeOptions;
-//import org.openqa.selenium.phantomjs.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 //Used for mounse and keyboard actions
 import org.openqa.selenium.interactions.Actions;
@@ -63,12 +60,12 @@ import java.util.ArrayList;
                 }
                 //Start the Selenium driver
                 try {
-                        //Create Firefox options for Selenium 4.x
-                        FirefoxOptions options = new FirefoxOptions();
+                        //Create Chrome options for Selenium 4.x
+                        ChromeOptions options = new ChromeOptions();
                         options.addArguments("--start-maximized");
                         
-                        //Create a new FF driver with options
-                        this.driver = new FirefoxDriver(options);
+                        //Selenium Manager resolves a ChromeDriver build that matches the installed Chrome
+                        this.driver = new ChromeDriver(options);
                         
                         //set default timeout for driver (Selenium 4.x syntax)
                         this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
